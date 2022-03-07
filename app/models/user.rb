@@ -7,4 +7,7 @@ class User < ApplicationRecord
          :rememberable,
          :jwt_authenticatable,
          jwt_revocation_strategy: JwtDenylist
+
+  validates :first_name, length: { minimum: 2, maximum: 20 }
+  validates :last_name, length: { minimum: 2, maximum: 20 }
 end
