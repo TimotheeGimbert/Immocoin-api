@@ -10,4 +10,6 @@ class User < ApplicationRecord
 
   validates :first_name, length: { maximum: 20 }
   validates :last_name, length: { maximum: 20 }
+
+  has_many :properties
 end
