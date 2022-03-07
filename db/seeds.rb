@@ -40,9 +40,10 @@ User.create(
 30.times do |i|
   loading_bar(i + 1, 30, 'creating Properties')
   Property.create(
-    title: Faker::Lorem.word,
+    title: Faker::Lorem.sentence(word_count: 5),
     price: rand(99_999_999),
-    description: Faker::Lorem.paragraph(sentence_count: 5),
-    address: Faker::Address.full_address
+    description: Faker::Lorem.paragraph(sentence_count: 2),
+    address: Faker::Address.full_address,
+    user: User.find(rand(3) + 1)
   )
 end
