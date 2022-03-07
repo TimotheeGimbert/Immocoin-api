@@ -50,3 +50,5 @@ end
 gem "devise", "~> 4.8"
 gem "devise-jwt", "~> 0.9.0"
 gem "rack-cors", "~> 1.1"
+
+gem "faker", "~> 2.20"
