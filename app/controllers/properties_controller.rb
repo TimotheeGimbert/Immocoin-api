@@ -3,28 +3,27 @@ class PropertiesController < ApplicationController
   before_action :authenticate_user!, only: %i[create update destroy]
 
   def index
-    @properties = Property.all
+    @properties = []
+    Property.all.each do |property|
+      @properties << {
+        property: property,
+        picture: rails_blob_url(property.picture)
+      }
+    end
     render json: {
       properties: @properties
     }
   end
 
   def show
-    render json: {
-      property: @property,
-      user: @property.user
-    }
+    property_data
   end
 
   def create
     @property = Property.new(property_params)
     @property.user = current_user
     if @property.save
-      render json: {
-        message: 'propriété ajoutée',
-        property: @property,
-        user: @property.user
-      }
+      property_data('propriété ajoutée')
     else
       error_formatter(@property)
     end
@@ -38,11 +37,7 @@ class PropertiesController < ApplicationController
       @property.errors.add(:user, :not_owner)
       error_formatter(@property)
     elsif @property.update(property_params)
-      render json: {
-        message: 'propriété mise a jour avec succes',
-        property: @property,
-        user: @property.user
-      }
+      property_data('propriété mise a jour avec succes')
     else
       error_formatter(@property)
     end
@@ -64,6 +59,15 @@ class PropertiesController < ApplicationController
   end
 
   def property_params
-    params.require(:property).permit(:title, :description, :price, :address)
+    params.require(:property).permit(:title, :description, :price, :address, :picture)
+  end
+
+  def property_data(message = nil)
+    render json: {
+      message: message,
+      property: @property,
+      user: @property.user,
+      picture: rails_blob_url(@property.picture)
+    }
   end
 end

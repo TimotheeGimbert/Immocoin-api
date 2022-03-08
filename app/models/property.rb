@@ -5,4 +5,6 @@ class Property < ApplicationRecord
   validates :description, presence: true, length: { minimum: 5, maximum: 1000 }
   validates :price, presence: true
   validates :address, presence: true
+
+  has_one_attached :picture
 end
