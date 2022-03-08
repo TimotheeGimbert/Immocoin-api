@@ -1,0 +1,49 @@
+fr:
+  activerecord:
+    attributes:
+      user:
+        email: "Adresse mail"
+        password: "Mot de passe"
+        first_name: "Prénom"
+        last_name: "Nom de famille"
+      property:
+        title: "Titre"
+        description: "Description"
+        price: "Prix"
+        address: "addresse"
+        user: "vous"
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "ne peut pas etre vide"
+              taken: "deja utilisée"
+              invalid: "invalide (doit etre au format exemple@exemple.com)"
+            password:
+              blank: "ne peut pas etre vide"
+              too_short: "trop court (%{count} caractères minimum)"
+            first_name:
+              blank: "ne peut pas etre vide"
+              too_short: "trop court (%{count} caractères minimum)"
+              too_long: "trop long (%{count} caractères maximum)"
+            last_name:
+              blank: "ne peut pas etre vide"
+              too_short: "trop court (%{count} caractères minimum)"
+              too_long: "trop long (%{count} caractères maximum)"
+        property:
+          attributes:
+            title:
+              blank: "ne peut pas etre vide"
+              too_short: "trop court (%{count} caractères minimum)"
+              too_long: "trop long (%{count} caractères maximum)"
+            description:
+              blank: "ne peut pas etre vide"
+              too_short: "trop courte (%{count} caractères minimum)"
+              too_long: "trop longue (%{count} caractères maximum)"
+            price:
+              blank: "ne peut pas etre vide"
+            address:
+              blank: "ne peut pas etre vide"
+            user:
+              not_owner: "n'etes pas le propriétaire de la propriété"
