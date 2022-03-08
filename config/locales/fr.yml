@@ -43,6 +43,7 @@ fr:
               too_long: "trop longue (%{count} caractères maximum)"
             price:
               blank: "ne peut pas etre vide"
+              not_an_integer: "doit etre un nombre entier"
             address:
               blank: "ne peut pas etre vide"
             user:

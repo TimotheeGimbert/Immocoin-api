@@ -55,7 +55,7 @@ RSpec.describe Property, :type => :model do
     subject.price = 'hundred thousands'
     expect(subject).to_not be_valid
     subject.price = 130000.2
-    expect(subject).to_not be_valid
+    expect(subject).to be_valid
   end
 
 end
