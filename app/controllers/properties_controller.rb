@@ -11,7 +11,8 @@ class PropertiesController < ApplicationController
 
   def show
     render json: {
-      property: @property
+      property: @property,
+      user: @property.user
     }
   end
 
@@ -21,7 +22,8 @@ class PropertiesController < ApplicationController
     if @property.save
       render json: {
         message: 'propriété ajoutée',
-        property: @property
+        property: @property,
+        user: @property.user
       }
     else
       error_formatter(@property)
@@ -38,7 +40,8 @@ class PropertiesController < ApplicationController
     elsif @property.update(property_params)
       render json: {
         message: 'propriété mise a jour avec succes',
-        property: @property
+        property: @property,
+        user: @property.user
       }
     else
       error_formatter(@property)
