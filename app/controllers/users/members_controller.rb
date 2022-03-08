@@ -19,9 +19,8 @@ class Users::MembersController < ApplicationController
         last_name: current_user.last_name
       }
     else
-      render json: current_user.errors, status: :unprocessable_entity
+      error_formatter(current_user)
     end
-
   end
 
   private

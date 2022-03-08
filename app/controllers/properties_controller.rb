@@ -20,13 +20,11 @@ class PropertiesController < ApplicationController
     @property.user = current_user
     if @property.save
       render json: {
-        message: 'property added !',
+        message: 'propriété ajoutée',
         property: @property
       }
     else
-      render json: {
-        message: 'something went wrong'
-      }
+      error_formatter(@property)
     end
   end
 
@@ -36,24 +34,28 @@ class PropertiesController < ApplicationController
 
     if current_user.id != @property.user.id
       render json: {
-        message: 'properties can only be modified by their owners'
-      }
+        error: {
+          title: "une erreur s'est produite",
+          message: 'une propriété ne peut etre modifiée que par son proriétaire'
+        }
+      }, status: :unprocessable_entity
     elsif @property.update(property_params)
       render json: {
-        message: 'property updated successfully',
+        message: 'propriété mise a jour avec succes',
         property: @property
       }
     else
-      render json: {
-        message: 'something went wrong !'
-      }
+      error_formatter(@property)
     end
   end
 
   def destroy
     if current_user != @property.user
       render json: {
-        message: 'properties can only be deleted by their owners'
+        error: {
+          title: "une erreur s'est produite",
+          message: "une propriété ne peut etre supprimée que par son propriétaire"
+        }
       }
     else
       @property.destroy

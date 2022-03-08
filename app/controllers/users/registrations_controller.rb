@@ -19,6 +19,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def register_failed
-    render json: { message: "Something went wrong." }
+    error_formatter(resource)
   end
 end
