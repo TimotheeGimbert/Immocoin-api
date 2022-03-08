@@ -55,3 +55,5 @@ gem "rack-cors", "~> 1.1"
 gem "faker", "~> 2.20"
 
 gem "i18n", "~> 1.10"
+
+gem "aws-sdk-s3", require: false

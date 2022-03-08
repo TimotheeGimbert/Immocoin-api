@@ -9,8 +9,8 @@ class User < ApplicationRecord
          :jwt_authenticatable,
          jwt_revocation_strategy: JwtDenylist
 
-  validates :first_name, length: { minimum: 2, maximum: 20 }, unless: first_name.nil?
-  validates :last_name, length: { minimum: 2, maximum: 20 }, unless: last_name.nil?
+  validates :first_name, length: { minimum: 2, maximum: 20 }, unless: nil?
+  validates :last_name, length: { minimum: 2, maximum: 20 }, unless: nil?
 
   has_many :properties
 end
