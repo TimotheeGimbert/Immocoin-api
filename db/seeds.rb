@@ -1,3 +1,5 @@
+require 'faker'
+
 Property.destroy_all
 User.destroy_all
 
@@ -56,19 +58,21 @@ user4.avatar.attach(
   filename: 'avatar.jpg'
 )
 
+titles = ['Maison Lumineuse & Calme de la Citadelle', 'Coeur Historique au bord des remparts', 'Lodge du Domaine de l\'étang Fourchu', 'La Pensine du Célèbre Sorcier', 'Les studios de Flo', 'Les gîtes de la Bergeraine', 'Escapade au Coeur de la Vieille Ville', 'À l\'Ombre du Ginkgo', 'Le Toit-Terrasse du Lion d\'Or de Stuttgart', 'Charmant demeure de “Frida”', 'Appartement de rêve dans un emplacement idéal', 'Appartement WOODWOOD près de l\'aéroport']
+
 30.times do |i|
   loading_bar(i + 1, 30, 'creating Properties')
 
   property = Property.create(
-    title: Faker::Lorem.sentence(word_count: 5),
+    title: titles[rand(1..titles.length)],
     price: rand(9_999_999),
-    description: Faker::Lorem.paragraph(sentence_count: 2),
+    description: Faker::House.room + ' ' + Faker::House.furniture + ' ' + Faker::House.furniture,
     address: Faker::Address.full_address,
     user: User.find(rand(1..3))
   )
 
   property.picture.attach(
-    io: File.open(Rails.root.join('app', 'assets', "property#{rand(1..4)}.jpg")),
+    io: File.open(Rails.root.join('app', 'assets', "property#{rand(1..5)}.jpg")),
     filename: 'property.jpg'
   )
 end
