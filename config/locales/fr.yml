@@ -11,6 +11,7 @@ fr:
         description: "Description"
         price: "Prix"
         address: "addresse"
+        user: "vous"
     errors:
       models:
         user:
@@ -44,3 +45,5 @@ fr:
               blank: "ne peut pas etre vide"
             address:
               blank: "ne peut pas etre vide"
+            user:
+              not_owner: "n'etes pas le propriétaire de la propriété"

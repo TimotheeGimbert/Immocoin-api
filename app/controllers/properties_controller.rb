@@ -33,12 +33,8 @@ class PropertiesController < ApplicationController
     puts @property.user.id
 
     if current_user.id != @property.user.id
-      render json: {
-        error: {
-          title: "une erreur s'est produite",
-          message: 'une propriété ne peut etre modifiée que par son proriétaire'
-        }
-      }, status: :unprocessable_entity
+      @property.errors.add(:user, :not_owner)
+      error_formatter(@property)
     elsif @property.update(property_params)
       render json: {
         message: 'propriété mise a jour avec succes',
@@ -51,12 +47,8 @@ class PropertiesController < ApplicationController
 
   def destroy
     if current_user != @property.user
-      render json: {
-        error: {
-          title: "une erreur s'est produite",
-          message: "une propriété ne peut etre supprimée que par son propriétaire"
-        }
-      }
+      @property.errors.add(:user, :not_owner)
+      error_formatter(@property)
     else
       @property.destroy
     end

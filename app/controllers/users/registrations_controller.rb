@@ -10,12 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def register_success
-    render json: {
-      id: current_user.id,
-      email: current_user.email,
-      first_name: current_user.first_name || nil,
-      last_name: current_user.last_name || nil
-    }
+    render_user_json
   end
 
   def register_failed
