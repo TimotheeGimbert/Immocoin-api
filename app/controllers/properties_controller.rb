@@ -64,11 +64,14 @@ class PropertiesController < ApplicationController
   end
 
   def property_data(message = nil)
+    property = if @property.picture.attached?
+                 rails_blob_url(@property.picture)
+               end
     render json: {
       message: message,
       property: @property,
       user: @property.user,
-      picture: rails_blob_url(@property.picture)
+      picture: property
     }
   end
 
