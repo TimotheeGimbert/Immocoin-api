@@ -1,10 +1,11 @@
 class PropertiesController < ApplicationController
   before_action :set_property, only: %i[show update destroy]
   before_action :authenticate_user!, only: %i[create update destroy]
+  before_action :get_endpoints, only: %i[index]
 
   def index
     @properties = []
-    Property.all.each do |property|
+    set_properties.each do |property|
       @properties << {
         property: property,
         picture: rails_blob_url(property.picture)
@@ -69,5 +70,30 @@ class PropertiesController < ApplicationController
       user: @property.user,
       picture: rails_blob_url(@property.picture)
     }
+  end
+
+  def get_endpoints
+    @limit = if params[:limit]
+               params[:limit].to_i
+             else
+               20
+             end
+
+    page = if params[:page]
+             params[:page].to_i
+           else
+             1
+           end
+
+    @offset = (page - 1) * @limit
+    @user_id = params[:user_id]
+  end
+
+  def set_properties
+    if @user_id
+      Property.where(user_id: @user_id).order('created_at DESC').limit(@limit).offset(@offset)
+    else
+      Property.all.order('created_at DESC').limit(@limit).offset(@offset)
+    end
   end
 end
