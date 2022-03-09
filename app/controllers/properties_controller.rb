@@ -4,7 +4,7 @@ class PropertiesController < ApplicationController
 
   def index
     @properties = []
-    Property.all.each do |property|
+    Property.all.order("created_at DESC").each do |property|
       @properties << {
         property: property,
         picture: rails_blob_url(property.picture)
