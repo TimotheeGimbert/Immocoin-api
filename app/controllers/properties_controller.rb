@@ -1,10 +1,11 @@
 class PropertiesController < ApplicationController
   before_action :set_property, only: %i[show update destroy]
   before_action :authenticate_user!, only: %i[create update destroy]
+  before_action :get_endpoints, only: %i[index]
 
   def index
     @properties = []
-    Property.all.order("created_at DESC").each do |property|
+    Property.all.order("created_at DESC").limit(@limit).each do |property|
       @properties << {
         property: property,
         picture: rails_blob_url(property.picture)
@@ -69,5 +70,9 @@ class PropertiesController < ApplicationController
       user: @property.user,
       picture: rails_blob_url(@property.picture)
     }
+  end
+
+  def get_endpoints
+    @limit = params[:limit]
   end
 end
