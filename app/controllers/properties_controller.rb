@@ -5,7 +5,7 @@ class PropertiesController < ApplicationController
 
   def index
     @properties = []
-    Property.all.order("created_at DESC").limit(@limit).offset(@offset).each do |property|
+    set_properties.each do |property|
       @properties << {
         property: property,
         picture: rails_blob_url(property.picture)
@@ -86,5 +86,14 @@ class PropertiesController < ApplicationController
            end
 
     @offset = (page - 1) * @limit
+    @user_id = params[:user_id]
+  end
+
+  def set_properties
+    if @user_id
+      Property.where(user_id: @user_id).order('created_at DESC').limit(@limit).offset(@offset)
+    else
+      Property.all.order('created_at DESC').limit(@limit).offset(@offset)
+    end
   end
 end
