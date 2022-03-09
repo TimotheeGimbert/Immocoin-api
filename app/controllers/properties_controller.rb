@@ -5,7 +5,7 @@ class PropertiesController < ApplicationController
 
   def index
     @properties = []
-    Property.all.order("created_at DESC").limit(@limit).each do |property|
+    Property.all.order("created_at DESC").limit(@limit).offset(@offset).each do |property|
       @properties << {
         property: property,
         picture: rails_blob_url(property.picture)
@@ -73,6 +73,18 @@ class PropertiesController < ApplicationController
   end
 
   def get_endpoints
-    @limit = params[:limit]
+    @limit = if params[:limit]
+               params[:limit].to_i
+             else
+               20
+             end
+
+    page = if params[:page]
+             params[:page].to_i
+           else
+             1
+           end
+
+    @offset = (page - 1) * @limit
   end
 end
