@@ -16,6 +16,6 @@ class Users::MembersController < ApplicationController
   private
 
   def user_params
-    params.require(:member).permit(:first_name, :last_name)
+    params.permit(:first_name, :last_name, :avatar)
   end
 end
