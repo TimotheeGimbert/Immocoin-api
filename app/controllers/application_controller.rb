@@ -20,4 +20,5 @@ class ApplicationController < ActionController::API
       avatar: avatar
     }, status: :ok
   end
+  
 end
