@@ -13,52 +13,65 @@ end
 loading_bar(1, 4, 'creating users')
 user1 = User.create(
   email: 'boris@yopmail.com',
-  password: "password",
-  first_name: 'boris',
-  last_name: 'legroskiki'
+  password: 'password',
+  first_name: 'Boris',
+  last_name: 'VendTard'
 )
 user1.avatar.attach(
-  io: File.open(Rails.root.join('app', 'assets', "avatar1.jpg")),
+  io: File.open(Rails.root.join('app', 'assets', 'avatar1.jpg')),
   filename: 'avatar.jpg'
 )
 
 loading_bar(2, 4, 'creating users')
 user2 = User.create(
   email: 'pierre@yopmail.com',
-  password: "password",
-  first_name: 'pierre',
-  last_name: 'lemalealpha'
+  password: 'password',
+  first_name: 'Pierre',
+  last_name: 'PaixLeGrin'
 )
 user2.avatar.attach(
-  io: File.open(Rails.root.join('app', 'assets', "avatar2.jpg")),
+  io: File.open(Rails.root.join('app', 'assets', 'avatar2.jpg')),
   filename: 'avatar.jpg'
 )
 
 loading_bar(3, 4, 'creating users')
 user3 = User.create(
   email: 'thimothee@yopmail.com',
-  password: "password",
-  first_name: 'thimothee',
-  last_name: 'ledormeur'
+  password: 'password',
+  first_name: 'Timothée',
+  last_name: 'JeunBear'
 )
 user3.avatar.attach(
-  io: File.open(Rails.root.join('app', 'assets', "avatar3.jpg")),
+  io: File.open(Rails.root.join('app', 'assets', 'avatar3.jpg')),
   filename: 'avatar.jpg'
 )
 
 loading_bar(4, 4, 'creating users')
 user4 = User.create(
   email: 'anthony@yopmail.com',
-  password: "password",
-  first_name: 'anthony',
-  last_name: 'legenieduback'
+  password: 'password',
+  first_name: 'Anthony',
+  last_name: 'TasLeMidi'
 )
 user4.avatar.attach(
-  io: File.open(Rails.root.join('app', 'assets', "avatar4.jpg")),
+  io: File.open(Rails.root.join('app', 'assets', 'avatar4.jpg')),
   filename: 'avatar.jpg'
 )
 
-titles = ['Maison Lumineuse & Calme de la Citadelle', 'Coeur Historique au bord des remparts', 'Lodge du Domaine de l\'étang Fourchu', 'La Pensine du Célèbre Sorcier', 'Les studios de Flo', 'Les gîtes de la Bergeraine', 'Escapade au Coeur de la Vieille Ville', 'À l\'Ombre du Ginkgo', 'Le Toit-Terrasse du Lion d\'Or de Stuttgart', 'Charmant demeure de “Frida”', 'Appartement de rêve dans un emplacement idéal', 'Appartement WOODWOOD près de l\'aéroport']
+titles = [
+  'Maison Lumineuse & Calme de la Citadelle',
+  'Coeur Historique au bord des remparts',
+  'Lodge du Domaine de l\'étang Fourchu',
+  'La Pensine du Célèbre Sorcier',
+  'Les studios de Flo',
+  'Les gîtes de la Bergeraine',
+  'Escapade au Coeur de la Vieille Ville',
+  'À l\'Ombre du Ginkgo',
+  'Le Toit-Terrasse du Lion d\'Or de Stuttgart',
+  'Charmant demeure du Sud',
+  'Appartement de rêve dans un emplacement idéal',
+  'Appartement WOODWOOD près de l\'aéroport'
+]
 
 30.times do |i|
   loading_bar(i + 1, 30, 'creating Properties')
@@ -66,7 +79,7 @@ titles = ['Maison Lumineuse & Calme de la Citadelle', 'Coeur Historique au bord 
   property = Property.create(
     title: titles[rand(1..titles.length)],
     price: rand(9_999_999),
-    description: Faker::House.room + ' ' + Faker::House.furniture + ' ' + Faker::House.furniture,
+    description: 'Très charmante propriété pour laquelle une visite semble incontournable ! A saisir rapidement !',
     address: Faker::Address.full_address,
     user: User.find(rand(1..3))
   )
